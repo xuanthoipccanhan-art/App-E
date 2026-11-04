@@ -74,11 +74,11 @@
 
   // ---------- Giọng nói: nhận dạng (STT) ----------
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  function listen() {
+  function listen(lang) {
     return new Promise((resolve, reject) => {
       if (!SR) return reject(new Error("Trình duyệt không hỗ trợ nhận dạng giọng nói. Hãy dùng Chrome hoặc Edge, hoặc gõ câu trả lời."));
       const r = new SR();
-      r.lang = settings.accent; r.interimResults = false; r.maxAlternatives = 3;
+      r.lang = lang || settings.accent; r.interimResults = false; r.maxAlternatives = 3;
       let done = false;
       r.onresult = (e) => {
         done = true;
@@ -223,8 +223,8 @@
       ${section("daily", "🏡 Đời sống hàng ngày", "Nhà hàng, mua sắm, hỏi đường, sân bay, khách sạn, khám bệnh, gia đình, hẹn hò bạn bè, ngân hàng, thuê nhà…")}
       <h2>🎯 Luyện thi TOEIC 4 kỹ năng</h2>
       <div class="card row"><span>Listening (Part 1–4), Reading (Part 5–7), Speaking (11 câu có đếm giờ, ghi âm), Writing (8 câu). Có đề rút gọn tính giờ và ước tính điểm.</span><span class="spacer"></span><button class="btn" data-nav="toeic">Luyện thi</button></div>
-      <h2>🤖 Luyện nói tự do 1-1</h2>
-      <div class="card row"><span>Nói chuyện tự do với gia sư AI theo tình huống: phỏng vấn, họp với tư vấn, nghiệm thu, gọi món, đi khám bệnh, trò chuyện với hàng xóm…</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
+      <h2>👩‍🏫 Gia sư riêng 1-1</h2>
+      <div class="card row"><span>Gia sư AI chỉ dạy riêng bạn: nhớ hồ sơ, từ mới và lỗi sai của bạn; nói chậm, dịch, giải thích khi bạn chưa hiểu, gợi ý câu để bạn nói tiếp. Có cả các tình huống đóng vai.</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
     $app.querySelectorAll("[data-topic]").forEach((b) => b.onclick = () => go(`#/topic/${b.dataset.topic}/vocab`));
   }
 

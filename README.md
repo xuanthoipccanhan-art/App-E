@@ -14,7 +14,7 @@
 | 📝 Kiểm tra | 4 dạng câu hỏi: Anh→Việt, Việt→Anh, điền từ, nghe chọn từ. Câu sai tự thêm vào danh sách từ khó |
 | 🔁 Ôn tập | Ôn tổng hợp tất cả chủ đề hoặc chỉ các từ khó |
 | 🎯 Luyện thi TOEIC | **Listening** Part 1–4 (máy đọc, hội thoại 2 giọng nam/nữ, hiện script sau khi trả lời) · **Reading** Part 5–7 (có giải thích đáp án tiếng Việt) · **Speaking** 11 câu (đếm giờ chuẩn bị/trả lời như thi thật, tự ghi lại lời nói, bài mẫu) · **Writing** 8 câu (đếm giờ, đếm từ, kiểm tra nhanh cấu trúc, bài mẫu) · **Đề rút gọn L&R** 40 câu/25 phút, nghe 1 lần, ước tính điểm thang 990, xem lại câu sai. Có khóa API thì AI chấm Speaking/Writing theo thang điểm TOEIC |
-| 🤖 Gia sư AI | Hội thoại tự do với Claude theo tình huống (phỏng vấn, họp với tư vấn, nghiệm thu, thương lượng FIDIC, gọi món, sân bay & khách sạn, khám bệnh, trò chuyện hàng ngày…). Sau mỗi câu, gia sư sửa lỗi và gợi ý cách nói tự nhiên hơn bằng tiếng Việt |
+| 👩‍🏫 Gia sư riêng (AI) | Gia sư chỉ dạy riêng bạn: dựa trên **hồ sơ** (tên, công việc, mục tiêu, sở thích, điểm yếu), tự ghi **sổ tay** từ mới và lỗi sai rồi ôn lại ở các buổi sau. Giúp **nghe hiểu**: nghe chậm, xem dịch, từ khó kèm nghĩa, chế độ luyện nghe ẩn chữ, nút *Tôi chưa hiểu*. Giúp **nói tiếp**: 3 câu gợi ý để trả lời, nút *Nói tiếng Việt* để gia sư dạy cách nói câu đó bằng tiếng Anh. Có tổng kết và bài tập về nhà sau mỗi buổi, cùng các tình huống đóng vai (phỏng vấn, họp, nghiệm thu, nhà hàng, sân bay…) |
 
 Tiến độ (từ đã thuộc, điểm kiểm tra, điểm đóng vai, chuỗi ngày học) được lưu trong trình duyệt.
 
