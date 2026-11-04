@@ -37,7 +37,14 @@ python3 -m http.server 8000
 
 Sau đó mở http://localhost:8000.
 
-**Dùng trên điện thoại:** bật GitHub Pages cho repo (Settings → Pages → Deploy from branch), rồi mở link trên Chrome Android hoặc Safari iOS và chọn “Thêm vào màn hình chính”.
+### Dùng trên iPhone (GitHub Pages)
+
+1. Repo phải ở chế độ **Public** (GitHub Pages miễn phí không chạy với repo Private): *Settings → General → Danger Zone → Change visibility → Public*. Repo không chứa khóa API hay dữ liệu cá nhân nào.
+2. *Settings → Pages → Build and deployment → Source: Deploy from a branch* → chọn nhánh chứa app (ví dụ `main` hoặc `claude/determined-cray-h5pl4t`), thư mục `/ (root)` → **Save**.
+3. Đợi 1–2 phút, link có dạng `https://<tên-tài-khoản>.github.io/App-E/`.
+4. Trên iPhone mở link bằng **Safari** → nút Chia sẻ → **Thêm vào Màn hình chính**. App sẽ có icon riêng và chạy toàn màn hình.
+
+Lưu ý trên iPhone: lần đầu bấm 🎤, Safari sẽ hỏi quyền dùng micro và nhận dạng giọng nói, hãy chọn Cho phép. Nếu micro không hoạt động khi mở từ icon ở màn hình chính, hãy mở link trực tiếp trong Safari.
 
 ## Gia sư AI
 
