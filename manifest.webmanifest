@@ -1,0 +1,9 @@
+{
+  "name": "Engineer English 1-1",
+  "short_name": "EngEnglish",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f7fa",
+  "theme_color": "#1f5f8b",
+  "icons": []
+}
