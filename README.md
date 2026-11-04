@@ -13,7 +13,7 @@
 | 🃏 Flashcard | Lật thẻ Anh ↔ Việt, ôn lại từ chưa nhớ |
 | 📝 Kiểm tra | 4 dạng câu hỏi: Anh→Việt, Việt→Anh, điền từ, nghe chọn từ. Câu sai tự thêm vào danh sách từ khó |
 | 🔁 Ôn tập | Ôn tổng hợp tất cả chủ đề hoặc chỉ các từ khó |
-| 🎯 Luyện thi TOEIC | **Listening** Part 1–4 (máy đọc, hội thoại 2 giọng nam/nữ, hiện script sau khi trả lời) · **Reading** Part 5–7 (có giải thích đáp án tiếng Việt) · **Speaking** 11 câu (đếm giờ chuẩn bị/trả lời như thi thật, tự ghi lại lời nói, bài mẫu) · **Writing** 8 câu (đếm giờ, đếm từ, kiểm tra nhanh cấu trúc, bài mẫu) · **Đề rút gọn L&R** 40 câu/25 phút, nghe 1 lần, ước tính điểm thang 990, xem lại câu sai. Có khóa API thì AI chấm Speaking/Writing theo thang điểm TOEIC |
+| 🎯 Luyện thi TOEIC | **Listening** Part 1–4 (máy đọc, hội thoại 2 giọng nam/nữ, hiện script sau khi trả lời) · **Reading** Part 5–7 (có giải thích đáp án tiếng Việt) · **Speaking** 11 câu (đếm giờ chuẩn bị/trả lời như thi thật, tự ghi lại lời nói, bài mẫu) · **Writing** 8 câu (đếm giờ, đếm từ, kiểm tra nhanh cấu trúc, bài mẫu) · **4 bộ đề** (251 câu Listening & Reading, có câu hỏi bảng biểu Part 3–4 và đọc nhiều đoạn Part 7), làm trọn đề có tính giờ, hoặc **đề ngẫu nhiên** 40 câu/25 phút; nghe 1 lần, ước tính điểm thang 990, xem lại câu sai. Có khóa API thì AI chấm Speaking/Writing theo thang điểm TOEIC |
 | 🆓 Gia sư miễn phí | Không cần khóa API, chạy offline. Mỗi bài học (26 chủ đề) gồm: học câu → nghe hiểu (nghe rồi chọn nghĩa) → nói chuyện có hướng dẫn (gia sư đóng vai, bạn trả lời tự do). Có nút *Tôi chưa hiểu*, *Gợi ý* 3 mức, *Nói tiếng Việt*; tự sửa các lỗi ngữ pháp hay gặp của người Việt; ghi sổ tay chung với gia sư AI. Có bài *Nói về bạn* (10 câu hỏi hay gặp) và nút sao chép lời nhắc để luyện nói tự do với Claude bản miễn phí |
 | 🤖 Gia sư AI (tính phí) | Gia sư chỉ dạy riêng bạn: dựa trên **hồ sơ** (tên, công việc, mục tiêu, sở thích, điểm yếu), tự ghi **sổ tay** từ mới và lỗi sai rồi ôn lại ở các buổi sau. Giúp **nghe hiểu**: nghe chậm, xem dịch, từ khó kèm nghĩa, chế độ luyện nghe ẩn chữ, nút *Tôi chưa hiểu*. Giúp **nói tiếp**: 3 câu gợi ý để trả lời, nút *Nói tiếng Việt* để gia sư dạy cách nói câu đó bằng tiếng Anh. Có tổng kết và bài tập về nhà sau mỗi buổi, cùng các tình huống đóng vai (phỏng vấn, họp, nghiệm thu, nhà hàng, sân bay…) |
 
@@ -81,6 +81,7 @@ js/data.js        Nội dung bài học
 js/app.js         Từ vựng, hội thoại, đóng vai, flashcard, kiểm tra, ôn tập, cài đặt
 js/freetutor.js   Gia sư miễn phí (offline, sửa lỗi ngữ pháp theo quy tắc)
 js/tutor.js       Gia sư AI (Claude)
-js/toeic-data.js  Ngân hàng câu hỏi TOEIC (tự soạn theo format đề thi)
+js/toeic-data.js  Đề 1 + Speaking/Writing (tự soạn theo format đề thi)
+js/toeic-tests.js Đề 2–4 (thêm đề mới: thêm phần tử vào window.TOEIC_TESTS)
 js/toeic.js       Luyện thi TOEIC 4 kỹ năng, đề rút gọn, AI chấm bài
 ```

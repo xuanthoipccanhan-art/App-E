@@ -5,14 +5,40 @@
   const KEY = "ee11.toeic.v1";
   const L = "ABCD";
 
+  // Đề 1 = ngân hàng gốc trong toeic-data.js; Đề 2+ trong toeic-tests.js
+  const PART_KEYS = ["L1", "L2", "L3", "L4", "R5", "R6", "R7"];
+  // Xáo thứ tự lựa chọn theo hạt giống cố định (mỗi câu luôn giống nhau giữa các lần mở) để đáp án
+  // phân bố đều A–D. Giữ nguyên các lựa chọn có thứ tự tự nhiên (giá, giờ, số, vị trí [1]–[4]).
+  function seeded(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; }; }
+  function shuffleQ(q, key) {
+    if (q.opts.every((o) => /^[\[$\d]/.test(o))) return q;
+    const rnd = seeded(key + q.opts.join("|"));
+    const idx = q.opts.map((_, i) => i);
+    for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+    return Object.assign({}, q, { opts: idx.map((i) => q.opts[i]), a: idx.indexOf(q.a) });
+  }
+  function normalize(t) {
+    const out = Object.assign({}, t);
+    PART_KEYS.forEach((k) => {
+      out[k] = (t[k] || []).map((x, i) => x.qs
+        ? Object.assign({}, x, { qs: x.qs.map((q, j) => shuffleQ(q, `${t.id}${k}${i}.${j}`)) })
+        : shuffleQ(x, `${t.id}${k}${i}`));
+    });
+    return out;
+  }
+  let _tests = null;
+  const tests = () => _tests || (_tests = [Object.assign({ id: "t1", title: "Đề 1 – Tổng hợp" }, T), ...(window.TOEIC_TESTS || [])].map(normalize));
+  let _bank = null;
+  const bank = () => _bank || (_bank = Object.fromEntries(PART_KEYS.map((k) => [k, tests().flatMap((t) => t[k] || [])])));
+  const nQ = (src, k) => ["L1", "L2", "R5"].includes(k) ? src[k].length : src[k].reduce((s, x) => s + x.qs.length, 0);
   const PARTS = {
-    L1: { name: "Part 1 – Mô tả tranh", skill: "L", n: () => T.L1.length },
-    L2: { name: "Part 2 – Hỏi đáp", skill: "L", n: () => T.L2.length },
-    L3: { name: "Part 3 – Hội thoại", skill: "L", n: () => T.L3.reduce((s, x) => s + x.qs.length, 0) },
-    L4: { name: "Part 4 – Bài nói ngắn", skill: "L", n: () => T.L4.reduce((s, x) => s + x.qs.length, 0) },
-    R5: { name: "Part 5 – Điền câu", skill: "R", n: () => T.R5.length },
-    R6: { name: "Part 6 – Điền đoạn văn", skill: "R", n: () => T.R6.reduce((s, x) => s + x.qs.length, 0) },
-    R7: { name: "Part 7 – Đọc hiểu", skill: "R", n: () => T.R7.reduce((s, x) => s + x.qs.length, 0) }
+    L1: { name: "Part 1 – Mô tả tranh", skill: "L", n: () => nQ(bank(), "L1") },
+    L2: { name: "Part 2 – Hỏi đáp", skill: "L", n: () => nQ(bank(), "L2") },
+    L3: { name: "Part 3 – Hội thoại", skill: "L", n: () => nQ(bank(), "L3") },
+    L4: { name: "Part 4 – Bài nói ngắn", skill: "L", n: () => nQ(bank(), "L4") },
+    R5: { name: "Part 5 – Điền câu", skill: "R", n: () => nQ(bank(), "R5") },
+    R6: { name: "Part 6 – Điền đoạn văn", skill: "R", n: () => nQ(bank(), "R6") },
+    R7: { name: "Part 7 – Đọc hiểu", skill: "R", n: () => nQ(bank(), "R7") }
   };
   const S_TASKS = {
     readAloud: { name: "Q1–2 · Đọc to đoạn văn", scale: 3 },
@@ -64,7 +90,15 @@
       <h1>🎯 Luyện thi TOEIC</h1>
       <p class="sub">Câu hỏi tự soạn theo đúng format đề thi. Luyện từng Part, rồi làm đề rút gọn để ước tính điểm.</p>
       ${last ? `<div class="stats"><div class="stat"><b>${last.L + last.R}</b><span>Đề gần nhất (L&R ước tính)</span></div><div class="stat"><b>${last.L}</b><span>Listening</span></div><div class="stat"><b>${last.R}</b><span>Reading</span></div></div>` : ""}
-      <div class="card row" style="margin-top:12px"><span>⏱️ <b>Đề rút gọn Listening & Reading</b>: 40 câu, 25 phút, nghe 1 lần như thi thật, có ước tính điểm thang 990.</span><span class="spacer"></span><button class="btn" data-go="#/toeic/mock">Làm đề</button></div>
+      <h2>📝 Bộ đề luyện thi</h2>
+      <p class="sub">Mỗi đề có đủ Part 1–7, tính giờ theo số câu, nghe 1 lần như thi thật, chấm và ước tính điểm thang 990.</p>
+      <div class="grid">${tests().map((t) => {
+        const n = PART_KEYS.reduce((s, k) => s + (t[k] ? nQ(t, k) : 0), 0);
+        const runs = data.mock.filter((m) => m.test === t.id);
+        const best = runs.length ? Math.max(...runs.map((m) => m.L + m.R)) : null;
+        return `<button class="card topic-card" data-go="#/toeic/mock/${t.id}"><span class="t">${esc(t.title)}</span><span class="e">${n} câu${best != null ? ` · Tốt nhất: ${best}/990` : ""}</span></button>`;
+      }).join("")}
+        <button class="card topic-card" data-go="#/toeic/mock"><span class="t">🎲 Đề ngẫu nhiên</span><span class="e">40 câu · 25 phút · trộn từ tất cả các đề</span></button></div>
       <h2>🎧 Listening</h2>
       <div class="grid">${["L1", "L2", "L3", "L4"].map((k) => partCard(k, best(k))).join("")}</div>
       <h2>📖 Reading</h2>
@@ -82,35 +116,35 @@
 
   // ---------- Bộ câu hỏi chung cho Listening/Reading ----------
   // set = { head, play?, qs:[{q?, opts, a, ex?}], script?, letterOnly? }
-  function buildSets(part) {
+  function buildSets(part, src = bank()) {
     switch (part) {
-      case "L1": return T.L1.map((x) => ({
+      case "L1": return (src.L1 || []).map((x) => ({
         head: `<div class="scene"><div class="emoji">${x.emoji}</div><div class="note">🖼️ Bức tranh: ${esc(x.scene)}</div></div>`,
         play: (st) => playSeq(["Look at the picture.", ...x.opts.map((o, i) => `${L[i]}. ${o}`)], st),
         letterOnly: true, qs: [{ opts: x.opts, a: x.a }],
         script: x.opts.map((o, i) => `(${L[i]}) ${esc(o)}`).join("<br>")
       }));
-      case "L2": return T.L2.map((x) => ({
+      case "L2": return (src.L2 || []).map((x) => ({
         head: `<div class="note">Nghe câu hỏi và chọn câu trả lời phù hợp nhất.</div>`,
         play: (st) => playSeq([x.q, ...x.opts.map((o, i) => `${L[i]}. ${o}`)], st),
         letterOnly: true, qs: [{ opts: x.opts, a: x.a }],
         script: `<b>${esc(x.q)}</b><br>` + x.opts.map((o, i) => `(${L[i]}) ${esc(o)}`).join("<br>")
       }));
-      case "L3": return T.L3.map((x) => ({
-        head: `<div class="note">${esc(x.title)} · Đọc trước câu hỏi, rồi bấm nghe.</div>`,
+      case "L3": return (src.L3 || []).map((x) => ({
+        head: `<div class="note">${esc(x.title)} · Đọc trước câu hỏi, rồi bấm nghe.</div>${x.graphic ? `<div class="passage">${esc(x.graphic)}</div>` : ""}`,
         play: (st) => playLines(x.lines, st), qs: x.qs,
         script: x.lines.map(([w, t]) => `<b>${w === "M" ? "Man" : "Woman"}:</b> ${esc(t)}`).join("<br>")
       }));
-      case "L4": return T.L4.map((x) => ({
-        head: `<div class="note">${esc(x.title)}</div>`,
+      case "L4": return (src.L4 || []).map((x) => ({
+        head: `<div class="note">${esc(x.title)}</div>${x.graphic ? `<div class="passage">${esc(x.graphic)}</div>` : ""}`,
         play: (st) => playSeq([x.text], st), qs: x.qs, script: esc(x.text)
       }));
-      case "R5": return T.R5.map((x) => ({ head: "", qs: [{ q: x.q, opts: x.opts, a: x.a, ex: x.ex }] }));
-      case "R6": return T.R6.map((x) => ({
+      case "R5": return (src.R5 || []).map((x) => ({ head: "", qs: [{ q: x.q, opts: x.opts, a: x.a, ex: x.ex }] }));
+      case "R6": return (src.R6 || []).map((x) => ({
         head: `<div class="passage"><b>${esc(x.title)}</b>\n\n${esc(x.text).replace(/\[(\d)\]/g, "<b class='blank'>($1) _____</b>")}</div>`,
         qs: x.qs.map((q, i) => Object.assign({ q: `Chỗ trống (${i + 1})` }, q))
       }));
-      case "R7": return T.R7.map((x) => ({ head: `<div class="passage"><b>${esc(x.title)}</b>\n\n${esc(x.text)}</div>`, qs: x.qs }));
+      case "R7": return (src.R7 || []).map((x) => ({ head: `<div class="passage"><b>${esc(x.title)}</b>\n\n${esc(x.text)}</div>`, qs: x.qs }));
     }
     return [];
   }
@@ -218,40 +252,53 @@
   }
 
   // ---------- Đề rút gọn L&R ----------
-  function renderMock() {
-    const pick = (arr, n) => App.shuffle(arr).slice(0, n);
-    const all = (p) => buildSets(p);
-    const lSets = [...pick(all("L1"), 3), ...pick(all("L2"), 6), ...pick(all("L3"), 2), ...pick(all("L4"), 1)];
-    const rSets = [...pick(all("R5"), 10), ...pick(all("R6"), 1), ...pick(all("R7"), 2)];
+  function renderMock(testId) {
+    const test = testId && tests().find((t) => t.id === testId);
+    let lSets, rSets, minutes, title;
+    if (test) {
+      // Làm trọn một đề, giữ nguyên thứ tự Part như đề thi
+      lSets = ["L1", "L2", "L3", "L4"].flatMap((k) => buildSets(k, test));
+      rSets = ["R5", "R6", "R7"].flatMap((k) => buildSets(k, test));
+      title = test.title;
+    } else {
+      const pick = (arr, n) => App.shuffle(arr).slice(0, n);
+      const all = (p) => buildSets(p);
+      lSets = [...pick(all("L1"), 3), ...pick(all("L2"), 6), ...pick(all("L3"), 2), ...pick(all("L4"), 1)];
+      rSets = [...pick(all("R5"), 10), ...pick(all("R6"), 1), ...pick(all("R7"), 2)];
+      title = "Đề ngẫu nhiên";
+    }
     lSets.forEach((s) => s.skill = "L"); rSets.forEach((s) => s.skill = "R");
     const sets = [...lSets, ...rSets];
     const nq = sets.reduce((s, x) => s + x.qs.length, 0);
-    $app.innerHTML = `${header("⏱️ Đề rút gọn Listening & Reading")}
-      <div class="card"><p>Đề gồm <b>${nq} câu</b>: Listening Part 1–4 trước, sau đó Reading Part 5–7.</p>
-      <ul><li>Thời gian: <b>25 phút</b>. Hết giờ sẽ tự nộp bài.</li><li>Mỗi đoạn nghe chỉ được phát <b>1 lần</b>, như thi thật.</li><li>Đáp án và giải thích hiện sau khi nộp bài.</li><li>Điểm ước tính chỉ để tham khảo (thang 10–990).</li></ul>
+    const nL = lSets.reduce((s, x) => s + x.qs.length, 0), nR = nq - nL;
+    // Tỉ lệ thời gian như đề thật: Listening ~0,45 phút/câu, Reading 0,75 phút/câu
+    minutes = test ? Math.ceil(nL * 0.45 + nR * 0.75) : 25;
+    $app.innerHTML = `${header("⏱️ " + esc(title))}
+      <div class="card"><p>Đề gồm <b>${nq} câu</b> (Listening ${nL} · Reading ${nR}): Listening Part 1–4 trước, sau đó Reading Part 5–7.</p>
+      <ul><li>Thời gian: <b>${minutes} phút</b>. Hết giờ sẽ tự nộp bài.</li><li>Mỗi đoạn nghe chỉ được phát <b>1 lần</b>, như thi thật.</li><li>Đáp án và giải thích hiện sau khi nộp bài.</li><li>Điểm ước tính chỉ để tham khảo (thang 10–990).</li></ul>
       <p class="note">Nên đeo tai nghe và ngồi ở nơi yên tĩnh.</p>
       <button class="btn" id="start">Bắt đầu làm bài</button></div>`;
     wireGo($app);
     $app.querySelector("#start").onclick = () => {
       let api;
       runSets({
-        title: header("⏱️ Đề rút gọn L&R"), sets, exam: true,
-        bar: `<div class="timerbar">⏱️ Còn lại <b id="clock">25:00</b><span class="spacer"></span><button class="btn ghost" id="submit">Nộp bài</button></div>`,
+        title: header("⏱️ " + esc(title)), sets, exam: true,
+        bar: `<div class="timerbar">⏱️ Còn lại <b id="clock">${minutes}:00</b><span class="spacer"></span><button class="btn ghost" id="submit">Nộp bài</button></div>`,
         api: (a) => { api = a; },
         onFinish: (_r, _t, log, timeUp) => {
           stopClock();
           const sk = (k) => { const x = log.filter((e) => e.set.skill === k); return { r: x.filter((e) => e.ok).length, n: x.length }; };
           const l = sk("L"), r = sk("R");
           const Ls = scaled(l.r / l.n), Rs = scaled(r.r / r.n);
-          data.mock.push({ date: new Date().toISOString().slice(0, 10), L: Ls, R: Rs }); data.mock = data.mock.slice(-20); saveData();
+          data.mock.push({ date: new Date().toISOString().slice(0, 10), L: Ls, R: Rs, test: testId || "random" }); data.mock = data.mock.slice(-20); saveData();
           return `${timeUp ? "<p class='err'>⏰ Hết giờ – bài đã được nộp tự động.</p>" : ""}
             <h2 style="margin-top:0">Điểm ước tính: ${Ls + Rs} / 990</h2>
             <div class="stats" style="justify-content:center"><div class="stat"><b>${Ls}</b><span>Listening (${l.r}/${l.n})</span></div><div class="stat"><b>${Rs}</b><span>Reading (${r.r}/${r.n})</span></div></div>
             <p class="note">Ước tính tuyến tính từ tỉ lệ đúng; điểm thi thật được quy đổi theo bảng riêng của từng đề.</p>`;
         },
-        again: renderMock
+        again: () => renderMock(testId)
       });
-      const stopClock = countdown(25 * 60, $app.querySelector("#clock"), () => api.finish(true));
+      const stopClock = countdown(minutes * 60, $app.querySelector("#clock"), () => api.finish(true));
       $app.querySelector("#submit").onclick = () => { if (confirm("Nộp bài ngay? Câu chưa làm sẽ tính là sai.")) api.finish(false); };
     };
   }
@@ -450,7 +497,7 @@ MẸO: <1 mẹo để tăng điểm cho dạng câu hỏi này>`;
     App.touchStreak();
     const [a, b] = parts;
     if (PARTS[a]) return renderPart(a);
-    if (a === "mock") return renderMock();
+    if (a === "mock") return renderMock(b);
     if (a === "S") return renderSpeaking(b || "readAloud");
     if (a === "W") return renderWriting(b || "sentence");
     renderHub();
