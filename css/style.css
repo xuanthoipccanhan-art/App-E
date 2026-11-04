@@ -172,3 +172,4 @@ details summary { cursor: pointer; }
 .ok { color: var(--good); }
 .fixrow { padding: 4px 0; border-bottom: 1px dashed var(--line); }
 details.fb summary { font-weight: 600; }
+.chip.doneChip { border-color: var(--good); }

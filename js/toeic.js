@@ -406,6 +406,10 @@
         if (task === "essay") msgs.push(/(for example|for instance|such as)/i.test(v) ? "✅ Có ví dụ minh họa" : "⚠️ Nên thêm ví dụ: “For example, …”");
         if (task === "essay") msgs.push(/(in conclusion|to sum up|in summary|overall)/i.test(v) ? "✅ Có đoạn kết luận" : "⚠️ Nên có kết luận: “In conclusion, …”");
       }
+      if (window.FreeTutor) {
+        const g = window.FreeTutor.checkGrammar(v);
+        msgs.push(g.notes.length ? `<b>Lỗi ngữ pháp phát hiện được (miễn phí):</b>` + g.notes.map((n) => `<div><span class="miss">${esc(n.wrong)}</span> → <b class="ok">${esc(n.right)}</b> <span class="note">${esc(n.why)}</span></div>`).join("") : "✅ Không thấy lỗi ngữ pháp phổ biến (bộ kiểm tra miễn phí chỉ bắt các lỗi hay gặp)");
+      }
       out.innerHTML = `<div class="fb">${msgs.join("<br>")}</div>`;
     };
     pane.querySelector("#sample").onclick = () => { out.innerHTML = `<div class="fb"><b>Bài mẫu:</b>\n${esc(it.sample)}</div>`; };
@@ -416,7 +420,7 @@
   async function aiGrade(out, kind, t, taskText, content, answer, sample) {
     if (!answer.trim()) { out.innerHTML = `<p class="err">Bạn chưa có câu trả lời để chấm.</p>`; return; }
     if (!window.ClaudeAI || !window.ClaudeAI.hasKey()) {
-      out.innerHTML = `<p class="err">Cần khóa API để AI chấm bài. <a href="#/tutor">Vào mục Gia sư AI</a> → Cài đặt gia sư AI để nhập khóa. Trong lúc chờ, bạn có thể so sánh với bài mẫu.</p>`;
+      out.innerHTML = `<p class="err">Cần khóa API để AI chấm bài. <a href="#/tutor/ai">Vào mục Gia sư → Gia sư AI</a> → Cài đặt gia sư AI để nhập khóa. Trong lúc chờ, bạn có thể so sánh với bài mẫu.</p>`;
       return;
     }
     out.innerHTML = `<p class="note">🤖 Đang chấm…</p>`;

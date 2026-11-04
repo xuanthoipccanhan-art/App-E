@@ -182,8 +182,9 @@
       case "topic": return renderTopic(parts[1], parts[2] || "vocab");
       case "review": return renderReview(parts[1] || "flash");
       case "tutor":
-        if (window.renderTutor) return window.renderTutor($app, App);
-        $app.innerHTML = '<p class="sub">Đang tải gia sư AI…</p>'; return;
+        if (parts[1] !== "ai" && window.renderFreeTutor) return window.renderFreeTutor($app, App);
+        if (parts[1] === "ai" && window.renderTutor) return window.renderTutor($app, App);
+        $app.innerHTML = '<p class="sub">Đang tải gia sư…</p>'; return;
       case "settings": return renderSettings();
       case "toeic":
         if (window.renderToeic) return window.renderToeic($app, App, parts.slice(1));
@@ -224,7 +225,7 @@
       <h2>🎯 Luyện thi TOEIC 4 kỹ năng</h2>
       <div class="card row"><span>Listening (Part 1–4), Reading (Part 5–7), Speaking (11 câu có đếm giờ, ghi âm), Writing (8 câu). Có đề rút gọn tính giờ và ước tính điểm.</span><span class="spacer"></span><button class="btn" data-nav="toeic">Luyện thi</button></div>
       <h2>👩‍🏫 Gia sư riêng 1-1</h2>
-      <div class="card row"><span>Gia sư AI chỉ dạy riêng bạn: nhớ hồ sơ, từ mới và lỗi sai của bạn; nói chậm, dịch, giải thích khi bạn chưa hiểu, gợi ý câu để bạn nói tiếp. Có cả các tình huống đóng vai.</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
+      <div class="card row"><span><b>Miễn phí, chạy offline:</b> gia sư dạy từng bước (học câu → nghe hiểu → nói chuyện), có dịch, nghe chậm, gợi ý câu trả lời và tự sửa lỗi ngữ pháp. Muốn nói chuyện tự do thì có gia sư AI hoặc Claude bản miễn phí.</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
     $app.querySelectorAll("[data-topic]").forEach((b) => b.onclick = () => go(`#/topic/${b.dataset.topic}/vocab`));
   }
 

@@ -140,8 +140,9 @@ async function ask(userText) {
 function renderTutor($app, App) {
   const { esc, speak, listen } = App;
   const p = cfg.profile;
-  $app.innerHTML = `
-    <h1>👩‍🏫 Gia sư riêng của bạn</h1>
+  $app.innerHTML = `${window.tutorTabs ? window.tutorTabs("ai") : ""}
+    <h1>🤖 Gia sư AI riêng của bạn</h1>
+    <p class="note">⚠️ Cần khóa API Anthropic và <b>tính phí theo lượt dùng</b>. Muốn miễn phí: dùng tab <b>Gia sư miễn phí</b>.</p>
     <p class="sub">Gia sư chỉ dạy riêng bạn: nhớ bạn là ai, nhớ từ mới và lỗi sai, nói chậm, dịch, giải thích khi bạn chưa hiểu, và gợi ý câu để bạn nói tiếp.</p>
     <div class="card">
       <div class="row">
@@ -336,5 +337,5 @@ async function grade(system, userText) {
 window.ClaudeAI = { hasKey: () => !!cfg.apiKey, grade };
 
 window.renderTutor = renderTutor;
-if (window.App && window.App.isTutorRoute()) window.App.route();
+if (window.App && location.hash.startsWith("#/tutor/ai")) window.App.route();
 })();
