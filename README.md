@@ -13,15 +13,17 @@
 | 🃏 Flashcard | Lật thẻ Anh ↔ Việt, ôn lại từ chưa nhớ |
 | 📝 Kiểm tra | 4 dạng câu hỏi: Anh→Việt, Việt→Anh, điền từ, nghe chọn từ. Câu sai tự thêm vào danh sách từ khó |
 | 🔁 Ôn tập | Ôn tổng hợp tất cả chủ đề hoặc chỉ các từ khó |
-| 🤖 Gia sư AI | Hội thoại tự do với Claude theo tình huống (phỏng vấn, họp với tư vấn, nghiệm thu, thương lượng FIDIC, kiểm tra an toàn…). Sau mỗi câu, gia sư sửa lỗi và gợi ý cách nói tự nhiên hơn bằng tiếng Việt |
+| 🤖 Gia sư AI | Hội thoại tự do với Claude theo tình huống (phỏng vấn, họp với tư vấn, nghiệm thu, thương lượng FIDIC, gọi món, sân bay & khách sạn, khám bệnh, trò chuyện hàng ngày…). Sau mỗi câu, gia sư sửa lỗi và gợi ý cách nói tự nhiên hơn bằng tiếng Việt |
 
 Tiến độ (từ đã thuộc, điểm kiểm tra, điểm đóng vai, chuỗi ngày học) được lưu trong trình duyệt.
 
-## 16 chủ đề
+## 26 chủ đề
 
 **Giao tiếp công việc:** Giới thiệu bản thân · Trò chuyện xã giao · Họp tiến độ · Gọi điện & email · Thuyết trình kỹ thuật · Thương lượng & xử lý bất đồng
 
 **Chuyên môn cầu đường:** Kết cấu cầu · Thiết kế & kết cấu đường · Vật liệu xây dựng · Nền móng & địa kỹ thuật · Thi công hiện trường & thiết bị · An toàn lao động (HSE) · Kiểm tra chất lượng & nghiệm thu (QA/QC) · Hợp đồng FIDIC & thanh toán · Khảo sát & trắc địa · Giao thông & thoát nước
+
+**Đời sống hàng ngày:** Nhà hàng & gọi món · Mua sắm · Hỏi đường & đi lại · Sân bay & xuất nhập cảnh · Khách sạn · Khám bệnh & hiệu thuốc · Gia đình & sở thích · Mời, hẹn gặp & từ chối · Ngân hàng, SIM & dịch vụ · Thuê nhà & sửa chữa
 
 ## Cách chạy
 
@@ -51,7 +53,8 @@ Toàn bộ bài học nằm trong `js/data.js`. Mỗi chủ đề có:
 
 ```js
 {
-  id, group: "general" | "tech", icon, title, en, scenario,
+  id, group: "general" | "tech" | "daily", icon, title, en, scenario,
+  roles: ["Tên vai A", "Tên vai B"],             // tùy chọn, mặc định "Đối tác" / "Bạn"
   v: [[english, ipa, vietnamese, example], ...],   // từ vựng
   p: [[english, vietnamese], ...],                 // mẫu câu
   d: [["A" | "B", english, vietnamese], ...]       // hội thoại (A = đối tác, B = bạn)

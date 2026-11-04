@@ -620,6 +620,419 @@ window.TOPICS = [
       ["A", "What about drainage? The diversion road may block the existing ditch.", "Còn thoát nước? Đường tránh có thể chặn rãnh hiện hữu."],
       ["B", "Good point. We'll install two 1-meter pipe culverts under the diversion road to keep the water flowing.", "Ý hay. Chúng tôi sẽ đặt hai cống tròn đường kính 1 m dưới đường tránh để nước vẫn thoát được."]
     ]
+  },
+  // ===================== ĐỜI SỐNG HÀNG NGÀY =====================
+  {
+    id: "restaurant", group: "daily", icon: "🍜", roles: ["Phục vụ", "Bạn"],
+    title: "Nhà hàng & gọi món", en: "Eating Out",
+    scenario: "Bạn đi ăn tối ở một nhà hàng, gọi món, hỏi về món ăn và thanh toán.",
+    v: [
+      ["menu", "/ˈmen.juː/", "thực đơn", "Could we see the menu, please?"],
+      ["reservation", "/ˌrez.əˈveɪ.ʃən/", "đặt bàn trước", "I have a reservation for two at seven."],
+      ["order", "/ˈɔː.dər/", "gọi món", "Are you ready to order?"],
+      ["starter / appetizer", "/ˈstɑː.tər/ /ˈæp.ə.taɪ.zər/", "món khai vị", "We'll share a starter."],
+      ["main course", "/meɪn kɔːs/", "món chính", "For the main course, I'll have the steak."],
+      ["dessert", "/dɪˈzɜːt/", "món tráng miệng", "Would you like any dessert?"],
+      ["spicy", "/ˈspaɪ.si/", "cay", "Is this dish very spicy?"],
+      ["allergic to", "/əˈlɜː.dʒɪk tuː/", "dị ứng với", "I'm allergic to peanuts."],
+      ["medium / well-done", "/ˈmiː.di.əm/ /ˌwel ˈdʌn/", "chín vừa / chín kỹ", "Medium, please."],
+      ["recommend", "/ˌrek.əˈmend/", "gợi ý, giới thiệu", "What do you recommend?"],
+      ["bill / check", "/bɪl/ /tʃek/", "hóa đơn", "Could we have the bill, please?"],
+      ["tip", "/tɪp/", "tiền boa", "Is the tip included?"],
+      ["takeaway / to go", "/ˈteɪk.ə.weɪ/", "mang về", "Can I get this to go?"],
+      ["split the bill", "/splɪt ðə bɪl/", "chia tiền", "Can we split the bill?"]
+    ],
+    p: [
+      ["A table for ___, please.", "Cho tôi một bàn ___ người."],
+      ["I'd like ___, please.", "Cho tôi ___."],
+      ["Could I have it without ___?", "Cho tôi món đó không có ___ được không?"],
+      ["What's in this dish?", "Món này có những gì?"],
+      ["Excuse me, this isn't what I ordered.", "Xin lỗi, đây không phải món tôi gọi."],
+      ["Can I pay by card?", "Tôi trả bằng thẻ được không?"]
+    ],
+    d: [
+      ["A", "Good evening. Do you have a reservation?", "Chào buổi tối. Anh có đặt bàn trước không?"],
+      ["B", "Yes, a table for two under the name Nam.", "Có, bàn hai người tên Nam."],
+      ["A", "This way, please. Here's the menu. Can I get you something to drink?", "Mời đi lối này. Đây là thực đơn. Anh muốn uống gì không?"],
+      ["B", "Two glasses of orange juice, please. What do you recommend for the main course?", "Cho hai ly nước cam. Món chính anh gợi ý món gì?"],
+      ["A", "Our grilled salmon is very popular, and the beef stew is excellent too.", "Cá hồi nướng của chúng tôi rất được ưa chuộng, và bò hầm cũng rất ngon."],
+      ["B", "I'll have the salmon. Does it come with any nuts? My wife is allergic to peanuts.", "Tôi lấy cá hồi. Món đó có hạt gì không? Vợ tôi dị ứng đậu phộng."],
+      ["A", "No, there are no nuts in it. And for your wife?", "Không, món đó không có hạt. Còn chị nhà dùng gì?"],
+      ["B", "She'll have the beef stew, please.", "Cô ấy dùng bò hầm."],
+      ["A", "Great. Anything else?", "Vâng. Còn gì nữa không ạ?"],
+      ["B", "That's all for now, thanks. And could we have the bill at the end? We'll pay by card.", "Bây giờ vậy thôi, cảm ơn. Lát nữa cho chúng tôi hóa đơn nhé, chúng tôi trả bằng thẻ."]
+    ]
+  },
+  {
+    id: "shopping", group: "daily", icon: "🛍️", roles: ["Người bán", "Bạn"],
+    title: "Mua sắm", en: "Shopping",
+    scenario: "Bạn đi mua quần áo ở trung tâm thương mại, hỏi cỡ, thử đồ, mặc cả và đổi trả.",
+    v: [
+      ["size", "/saɪz/", "cỡ, kích thước", "Do you have this in a larger size?"],
+      ["try on", "/traɪ ɒn/", "mặc thử", "Can I try this on?"],
+      ["fitting room", "/ˈfɪt.ɪŋ ruːm/", "phòng thử đồ", "Where's the fitting room?"],
+      ["fit", "/fɪt/", "vừa (kích cỡ)", "It doesn't fit me."],
+      ["suit", "/suːt/", "hợp (màu, kiểu)", "That color really suits you."],
+      ["discount", "/ˈdɪs.kaʊnt/", "giảm giá", "Is there a discount on this?"],
+      ["on sale", "/ɒn seɪl/", "đang giảm giá", "These shoes are on sale."],
+      ["cash", "/kæʃ/", "tiền mặt", "Do you take cash?"],
+      ["receipt", "/rɪˈsiːt/", "biên lai", "Can I have the receipt, please?"],
+      ["refund", "/ˈriː.fʌnd/", "hoàn tiền", "I'd like a refund."],
+      ["exchange", "/ɪksˈtʃeɪndʒ/", "đổi hàng", "Can I exchange this for a smaller one?"],
+      ["cashier", "/kæʃˈɪər/", "quầy thu ngân", "Please pay at the cashier."],
+      ["expensive / cheap", "/ɪkˈspen.sɪv/ /tʃiːp/", "đắt / rẻ", "It's a bit too expensive."],
+      ["just looking", "/dʒʌst ˈlʊk.ɪŋ/", "chỉ xem thôi", "I'm just looking, thanks."]
+    ],
+    p: [
+      ["How much is this?", "Cái này bao nhiêu tiền?"],
+      ["Do you have this in ___?", "Cái này có màu/cỡ ___ không?"],
+      ["Can you give me a better price?", "Bớt cho tôi chút được không?"],
+      ["I'll take it.", "Tôi lấy cái này."],
+      ["I'm just looking, thanks.", "Tôi chỉ xem thôi, cảm ơn."],
+      ["I'd like to return this. It doesn't fit.", "Tôi muốn trả lại cái này. Nó không vừa."]
+    ],
+    d: [
+      ["A", "Hi there. Can I help you with anything?", "Xin chào. Tôi có thể giúp gì cho anh?"],
+      ["B", "Yes, I'm looking for a shirt for work. Something formal.", "Vâng, tôi đang tìm áo sơ mi đi làm. Kiểu lịch sự."],
+      ["A", "These white and light blue shirts are very popular. What size are you?", "Mấy chiếc trắng và xanh nhạt này rất được ưa chuộng. Anh mặc cỡ nào?"],
+      ["B", "Usually medium. Can I try the blue one on?", "Thường là cỡ M. Tôi mặc thử chiếc xanh được không?"],
+      ["A", "Of course. The fitting room is over there.", "Tất nhiên. Phòng thử đồ ở đằng kia."],
+      ["B", "It's a little tight around the shoulders. Do you have it in a large?", "Hơi chật ở vai. Có cỡ L không?"],
+      ["A", "Yes, here you are. And it's 20 percent off this week.", "Có, đây ạ. Tuần này đang giảm 20%."],
+      ["B", "Great, this one fits well. I'll take it. Can I pay by card?", "Tuyệt, chiếc này vừa. Tôi lấy. Trả bằng thẻ được không?"],
+      ["A", "Sure. Here's your receipt. You can exchange it within 30 days.", "Được ạ. Đây là biên lai. Anh có thể đổi trong vòng 30 ngày."]
+    ]
+  },
+  {
+    id: "directions", group: "daily", icon: "🧭", roles: ["Người đi đường", "Bạn"],
+    title: "Hỏi đường & đi lại", en: "Directions & Transport",
+    scenario: "Bạn đi công tác ở nước ngoài, hỏi đường đến ga tàu và mua vé.",
+    v: [
+      ["turn left / right", "/tɜːn left/", "rẽ trái / phải", "Turn left at the traffic lights."],
+      ["go straight", "/ɡəʊ streɪt/", "đi thẳng", "Go straight for about 200 meters."],
+      ["intersection / crossroads", "/ˈkrɒs.rəʊdz/", "ngã tư", "It's at the next intersection."],
+      ["opposite", "/ˈɒp.ə.zɪt/", "đối diện", "The bank is opposite the post office."],
+      ["next to", "/nekst tuː/", "bên cạnh", "It's next to the supermarket."],
+      ["block", "/blɒk/", "dãy nhà (khoảng giữa 2 ngã tư)", "Walk two blocks."],
+      ["far / within walking distance", "/fɑːr/", "xa / đi bộ được", "Is it within walking distance?"],
+      ["subway / underground", "/ˈsʌb.weɪ/", "tàu điện ngầm", "Take the subway to Central Station."],
+      ["platform", "/ˈplæt.fɔːm/", "sân ga", "The train leaves from platform 3."],
+      ["one-way / return ticket", "/ˈwʌn.weɪ/ /rɪˈtɜːn/", "vé một chiều / khứ hồi", "A return ticket to Osaka, please."],
+      ["get off", "/ɡet ɒf/", "xuống (xe)", "Get off at the third stop."],
+      ["transfer / change", "/trænsˈfɜːr/", "chuyển tuyến", "You need to change at Shinjuku."],
+      ["fare", "/feər/", "giá vé", "How much is the fare?"],
+      ["lost", "/lɒst/", "lạc đường", "Excuse me, I think I'm lost."]
+    ],
+    p: [
+      ["Excuse me, how do I get to ___?", "Xin lỗi, đi đến ___ bằng cách nào?"],
+      ["Is it far from here?", "Chỗ đó có xa đây không?"],
+      ["Could you show me on the map?", "Anh chỉ giúp trên bản đồ được không?"],
+      ["Which bus goes to ___?", "Xe buýt nào đi đến ___?"],
+      ["Where should I get off?", "Tôi nên xuống ở đâu?"],
+      ["Sorry, could you say that again more slowly?", "Xin lỗi, anh nói lại chậm hơn được không?"]
+    ],
+    d: [
+      ["B", "Excuse me, sorry to bother you. How do I get to the central train station?", "Xin lỗi đã làm phiền. Đi đến ga tàu trung tâm bằng cách nào ạ?"],
+      ["A", "Oh, it's not far. Go straight down this street for two blocks, then turn right.", "À, không xa đâu. Đi thẳng phố này hai dãy nhà, rồi rẽ phải."],
+      ["B", "Two blocks, then right. And then?", "Hai dãy nhà rồi rẽ phải. Rồi sao nữa ạ?"],
+      ["A", "You'll see a big shopping mall. The station is opposite the mall.", "Anh sẽ thấy một trung tâm thương mại lớn. Ga nằm đối diện trung tâm đó."],
+      ["B", "Is it within walking distance?", "Đi bộ được không ạ?"],
+      ["A", "Yes, about ten minutes on foot. Or you can take bus number 12.", "Được, khoảng mười phút đi bộ. Hoặc anh có thể đi xe buýt số 12."],
+      ["B", "I'll walk. Do you know where I can buy a train ticket to the airport?", "Tôi đi bộ. Anh có biết mua vé tàu ra sân bay ở đâu không?"],
+      ["A", "There are ticket machines inside the station, or you can use a card.", "Trong ga có máy bán vé, hoặc anh có thể dùng thẻ."],
+      ["B", "Thank you so much for your help!", "Cảm ơn anh rất nhiều!"],
+      ["A", "You're welcome. Have a nice trip!", "Không có gì. Chúc anh đi vui vẻ!"]
+    ]
+  },
+  {
+    id: "airport", group: "daily", icon: "✈️", roles: ["Nhân viên", "Bạn"],
+    title: "Sân bay & xuất nhập cảnh", en: "At the Airport",
+    scenario: "Bạn làm thủ tục check-in và trả lời câu hỏi của nhân viên xuất nhập cảnh khi đi công tác.",
+    v: [
+      ["check in", "/tʃek ɪn/", "làm thủ tục", "Where do I check in for flight VN301?"],
+      ["passport", "/ˈpɑːs.pɔːt/", "hộ chiếu", "May I see your passport?"],
+      ["boarding pass", "/ˈbɔː.dɪŋ pɑːs/", "thẻ lên máy bay", "Here's your boarding pass."],
+      ["luggage / baggage", "/ˈlʌɡ.ɪdʒ/", "hành lý", "How many pieces of luggage do you have?"],
+      ["carry-on / hand luggage", "/ˈkær.i ɒn/", "hành lý xách tay", "Is this your carry-on?"],
+      ["aisle / window seat", "/aɪl/ /ˈwɪn.dəʊ siːt/", "ghế lối đi / cửa sổ", "Could I have an aisle seat?"],
+      ["gate", "/ɡeɪt/", "cửa ra máy bay", "Boarding is at gate 15."],
+      ["delayed", "/dɪˈleɪd/", "bị hoãn, trễ", "Our flight is delayed by an hour."],
+      ["connecting flight", "/kəˈnek.tɪŋ flaɪt/", "chuyến bay nối chuyến", "I have a connecting flight to Sydney."],
+      ["immigration", "/ˌɪm.ɪˈɡreɪ.ʃən/", "xuất nhập cảnh", "Go through immigration first."],
+      ["customs", "/ˈkʌs.təmz/", "hải quan", "Do you have anything to declare at customs?"],
+      ["purpose of visit", "/ˈpɜː.pəs əv ˈvɪz.ɪt/", "mục đích chuyến đi", "What's the purpose of your visit?"],
+      ["business trip", "/ˈbɪz.nɪs trɪp/", "chuyến công tác", "I'm here on a business trip."],
+      ["overweight", "/ˌəʊ.vəˈweɪt/", "quá cân", "Your bag is 3 kilos overweight."]
+    ],
+    p: [
+      ["I'd like to check in for my flight to ___.", "Tôi muốn làm thủ tục chuyến bay đi ___."],
+      ["Could I have a window seat, please?", "Cho tôi ghế cửa sổ được không?"],
+      ["What time does boarding start?", "Mấy giờ bắt đầu lên máy bay?"],
+      ["I'm here for ___ days on business.", "Tôi ở đây ___ ngày để công tác."],
+      ["I'm staying at ___ hotel.", "Tôi ở khách sạn ___."],
+      ["My luggage hasn't arrived.", "Hành lý của tôi chưa đến."]
+    ],
+    d: [
+      ["A", "Good morning. May I see your passport, please?", "Chào buổi sáng. Cho tôi xem hộ chiếu."],
+      ["B", "Here you are.", "Đây ạ."],
+      ["A", "What's the purpose of your visit?", "Mục đích chuyến đi của anh là gì?"],
+      ["B", "I'm here on a business trip. I'm attending a bridge engineering conference.", "Tôi đi công tác. Tôi dự hội thảo về kỹ thuật cầu."],
+      ["A", "How long will you be staying?", "Anh sẽ ở bao lâu?"],
+      ["B", "Five days. I'm flying back next Sunday.", "Năm ngày. Chủ nhật tuần sau tôi bay về."],
+      ["A", "Where are you staying?", "Anh ở đâu?"],
+      ["B", "At the Harbor View Hotel, near the convention center.", "Ở khách sạn Harbor View, gần trung tâm hội nghị."],
+      ["A", "Do you have a return ticket?", "Anh có vé khứ hồi không?"],
+      ["B", "Yes, here's my itinerary.", "Có, đây là lịch trình của tôi."],
+      ["A", "Thank you. Enjoy your stay.", "Cảm ơn. Chúc anh có chuyến đi vui vẻ."]
+    ]
+  },
+  {
+    id: "hotel", group: "daily", icon: "🏨", roles: ["Lễ tân", "Bạn"],
+    title: "Khách sạn", en: "At the Hotel",
+    scenario: "Bạn nhận phòng khách sạn, hỏi dịch vụ và phàn nàn khi phòng có vấn đề.",
+    v: [
+      ["check in / check out", "/tʃek ɪn/ /tʃek aʊt/", "nhận phòng / trả phòng", "What time is check-out?"],
+      ["booking", "/ˈbʊk.ɪŋ/", "đặt phòng", "I have a booking under the name Tran."],
+      ["single / double room", "/ˈsɪŋ.ɡəl/ /ˈdʌb.əl/", "phòng đơn / đôi", "I booked a single room."],
+      ["key card", "/kiː kɑːd/", "thẻ phòng", "My key card doesn't work."],
+      ["front desk / reception", "/frʌnt desk/", "quầy lễ tân", "Please call the front desk."],
+      ["breakfast included", "/ˈbrek.fəst ɪnˈkluː.dɪd/", "bao gồm ăn sáng", "Is breakfast included?"],
+      ["Wi-Fi password", "/ˈwaɪ.faɪ ˈpɑːs.wɜːd/", "mật khẩu Wi-Fi", "What's the Wi-Fi password?"],
+      ["air conditioner", "/eər kənˈdɪʃ.ən.ər/", "máy lạnh", "The air conditioner isn't working."],
+      ["towel", "/taʊəl/", "khăn tắm", "Could I have some extra towels?"],
+      ["laundry service", "/ˈlɔːn.dri ˈsɜː.vɪs/", "dịch vụ giặt ủi", "Do you have a laundry service?"],
+      ["wake-up call", "/ˈweɪk.ʌp kɔːl/", "gọi báo thức", "I'd like a wake-up call at 6 a.m."],
+      ["noisy", "/ˈnɔɪ.zi/", "ồn ào", "My room is very noisy."],
+      ["late check-out", "/leɪt ˈtʃek.aʊt/", "trả phòng muộn", "Is late check-out possible?"],
+      ["deposit", "/dɪˈpɒz.ɪt/", "tiền đặt cọc", "There's a deposit of 50 dollars."]
+    ],
+    p: [
+      ["I have a reservation under the name ___.", "Tôi đã đặt phòng tên ___."],
+      ["What time is breakfast served?", "Bữa sáng phục vụ lúc mấy giờ?"],
+      ["Could you call a taxi for me?", "Gọi giúp tôi một chiếc taxi được không?"],
+      ["There's a problem with my room. ___", "Phòng tôi có vấn đề. ___"],
+      ["Could I change to another room?", "Tôi đổi sang phòng khác được không?"],
+      ["Can I leave my luggage here after check-out?", "Tôi gửi hành lý ở đây sau khi trả phòng được không?"]
+    ],
+    d: [
+      ["A", "Good evening, welcome to the Riverside Hotel. How can I help you?", "Chào buổi tối, chào mừng đến khách sạn Riverside. Tôi giúp gì được ạ?"],
+      ["B", "Hi, I have a reservation under the name Tran Nam, for three nights.", "Chào chị, tôi đặt phòng tên Trần Nam, ba đêm."],
+      ["A", "Yes, a single room with breakfast. Could I see your passport and a credit card for the deposit?", "Vâng, phòng đơn có ăn sáng. Cho tôi xem hộ chiếu và thẻ tín dụng để đặt cọc."],
+      ["B", "Sure. What time is breakfast served?", "Đây ạ. Bữa sáng phục vụ lúc mấy giờ?"],
+      ["A", "From 6:30 to 10 a.m. on the second floor. Here's your key card. Room 815.", "Từ 6:30 đến 10 giờ sáng ở tầng hai. Đây là thẻ phòng. Phòng 815."],
+      ["B", "Thank you. And what's the Wi-Fi password?", "Cảm ơn. Mật khẩu Wi-Fi là gì?"],
+      ["A", "It's on the back of your key card holder.", "Ở mặt sau bìa đựng thẻ phòng ạ."],
+      ["B", "Great. One more thing, could I have a wake-up call at 6 tomorrow morning?", "Tuyệt. Còn một việc, sáng mai gọi báo thức cho tôi lúc 6 giờ được không?"],
+      ["A", "Of course. Enjoy your stay, Mr. Tran.", "Tất nhiên. Chúc anh Trần nghỉ ngơi vui vẻ."]
+    ]
+  },
+  {
+    id: "doctor", group: "daily", icon: "🩺", roles: ["Bác sĩ", "Bạn"],
+    title: "Khám bệnh & hiệu thuốc", en: "Doctor & Pharmacy",
+    scenario: "Bạn bị ốm khi đang ở nước ngoài, đi khám bác sĩ và mua thuốc.",
+    v: [
+      ["symptom", "/ˈsɪmp.təm/", "triệu chứng", "What are your symptoms?"],
+      ["headache", "/ˈhed.eɪk/", "đau đầu", "I've had a headache since yesterday."],
+      ["fever", "/ˈfiː.vər/", "sốt", "I have a high fever."],
+      ["sore throat", "/sɔːr θrəʊt/", "đau họng", "I have a sore throat and a cough."],
+      ["cough", "/kɒf/", "ho", "My cough is getting worse."],
+      ["stomachache", "/ˈstʌm.ək.eɪk/", "đau bụng", "I have a stomachache after eating."],
+      ["dizzy", "/ˈdɪz.i/", "chóng mặt", "I feel dizzy when I stand up."],
+      ["prescription", "/prɪˈskrɪp.ʃən/", "đơn thuốc", "Here's your prescription."],
+      ["pharmacy", "/ˈfɑː.mə.si/", "hiệu thuốc", "Is there a pharmacy nearby?"],
+      ["painkiller", "/ˈpeɪnˌkɪl.ər/", "thuốc giảm đau", "Can I buy painkillers without a prescription?"],
+      ["side effect", "/saɪd ɪˈfekt/", "tác dụng phụ", "Are there any side effects?"],
+      ["twice a day", "/twaɪs ə deɪ/", "hai lần một ngày", "Take two tablets twice a day after meals."],
+      ["appointment", "/əˈpɔɪnt.mənt/", "lịch hẹn", "I'd like to make an appointment."],
+      ["insurance", "/ɪnˈʃɔː.rəns/", "bảo hiểm", "Does my insurance cover this?"]
+    ],
+    p: [
+      ["I don't feel well.", "Tôi thấy không khỏe."],
+      ["I've had ___ for ___ days.", "Tôi bị ___ được ___ ngày rồi."],
+      ["It hurts here.", "Tôi đau ở chỗ này."],
+      ["Is it serious?", "Có nghiêm trọng không?"],
+      ["How often should I take this medicine?", "Thuốc này uống bao nhiêu lần?"],
+      ["Do you have something for ___?", "Có thuốc nào trị ___ không?"]
+    ],
+    d: [
+      ["A", "Hello, please have a seat. What seems to be the problem?", "Chào anh, mời ngồi. Anh bị sao vậy?"],
+      ["B", "I don't feel well. I've had a fever and a sore throat for two days.", "Tôi thấy không khỏe. Tôi bị sốt và đau họng hai ngày nay."],
+      ["A", "Do you have a cough or a headache?", "Anh có ho hay đau đầu không?"],
+      ["B", "Yes, a bit of a cough, and I feel very tired.", "Có, hơi ho, và tôi thấy rất mệt."],
+      ["A", "Let me check your temperature... It's 38.5. Open your mouth, please. Your throat is quite red.", "Để tôi đo nhiệt độ... 38,5 độ. Anh há miệng ra. Họng anh khá đỏ."],
+      ["B", "Is it serious?", "Có nghiêm trọng không ạ?"],
+      ["A", "No, it looks like a throat infection. I'll prescribe some antibiotics.", "Không, có vẻ là viêm họng. Tôi sẽ kê kháng sinh."],
+      ["B", "How often should I take them?", "Tôi uống bao nhiêu lần ạ?"],
+      ["A", "One tablet three times a day after meals, for five days. Drink plenty of water and get some rest.", "Mỗi lần một viên, ngày ba lần sau ăn, trong năm ngày. Uống nhiều nước và nghỉ ngơi."],
+      ["B", "Thank you, doctor. Can I go back to work tomorrow?", "Cảm ơn bác sĩ. Mai tôi đi làm lại được không?"],
+      ["A", "I'd suggest resting for at least two days.", "Tôi khuyên anh nghỉ ít nhất hai ngày."]
+    ]
+  },
+  {
+    id: "family", group: "daily", icon: "👨‍👩‍👧", roles: ["Bạn mới", "Bạn"],
+    title: "Gia đình & sở thích", en: "Family & Hobbies",
+    scenario: "Bạn trò chuyện với một người bạn mới quen về gia đình, quê hương và sở thích.",
+    v: [
+      ["married / single", "/ˈmær.id/ /ˈsɪŋ.ɡəl/", "đã kết hôn / độc thân", "Are you married?"],
+      ["son / daughter", "/sʌn/ /ˈdɔː.tər/", "con trai / con gái", "I have a son and a daughter."],
+      ["siblings", "/ˈsɪb.lɪŋz/", "anh chị em ruột", "Do you have any siblings?"],
+      ["parents", "/ˈpeə.rənts/", "bố mẹ", "My parents live in the countryside."],
+      ["grow up", "/ɡrəʊ ʌp/", "lớn lên", "I grew up in a small town."],
+      ["hobby", "/ˈhɒb.i/", "sở thích", "My hobby is fishing."],
+      ["free time", "/friː taɪm/", "thời gian rảnh", "What do you do in your free time?"],
+      ["be into", "/biː ˈɪn.tuː/", "thích, mê", "I'm really into football."],
+      ["go jogging", "/ɡəʊ ˈdʒɒɡ.ɪŋ/", "chạy bộ", "I go jogging every morning."],
+      ["cook", "/kʊk/", "nấu ăn", "My wife is a great cook."],
+      ["travel", "/ˈtræv.əl/", "du lịch", "We love to travel as a family."],
+      ["spend time with", "/spend taɪm wɪð/", "dành thời gian với", "I try to spend more time with my kids."],
+      ["get along with", "/ɡet əˈlɒŋ wɪð/", "hòa hợp với", "I get along well with my brother."],
+      ["relax", "/rɪˈlæks/", "thư giãn", "Reading helps me relax."]
+    ],
+    p: [
+      ["Where are you from originally?", "Quê gốc anh ở đâu?"],
+      ["I have ___ children. My son is ___ years old.", "Tôi có ___ con. Con trai tôi ___ tuổi."],
+      ["What do you like doing on weekends?", "Cuối tuần anh thích làm gì?"],
+      ["I'm really into ___.", "Tôi rất thích ___."],
+      ["How often do you ___?", "Anh có thường ___ không?"],
+      ["Me too! / Really? That's interesting.", "Tôi cũng vậy! / Thật à? Thú vị đấy."]
+    ],
+    d: [
+      ["A", "So, Nam, where are you from originally?", "Nam này, quê gốc anh ở đâu?"],
+      ["B", "I'm from Thanh Hoa, but I've lived in Hanoi for ten years.", "Tôi quê Thanh Hóa, nhưng đã sống ở Hà Nội mười năm."],
+      ["A", "Do you have a family?", "Anh có gia đình chưa?"],
+      ["B", "Yes, I'm married with two kids. My son is eight and my daughter is five.", "Rồi, tôi đã kết hôn và có hai con. Con trai tám tuổi, con gái năm tuổi."],
+      ["A", "That's lovely. Do you get to spend much time with them? Engineers work long hours.", "Thích quá. Anh có nhiều thời gian với các cháu không? Kỹ sư làm việc nhiều giờ lắm."],
+      ["B", "Not as much as I'd like. When I'm on site, I only go home on weekends.", "Không nhiều như tôi muốn. Khi ở công trường, tôi chỉ về nhà cuối tuần."],
+      ["A", "What do you like doing on weekends?", "Cuối tuần anh thích làm gì?"],
+      ["B", "We usually go to the park, and I'm really into badminton. How about you?", "Chúng tôi thường đi công viên, và tôi rất mê cầu lông. Còn anh?"],
+      ["A", "I love hiking. Maybe we can go hiking together sometime.", "Tôi thích leo núi. Hôm nào mình đi leo núi cùng nhé."],
+      ["B", "That sounds great! Let me know when you're free.", "Nghe tuyệt đấy! Khi nào rảnh thì báo tôi nhé."]
+    ]
+  },
+  {
+    id: "invite", group: "daily", icon: "🎉", roles: ["Bạn bè", "Bạn"],
+    title: "Mời, hẹn gặp & từ chối", en: "Invitations & Making Plans",
+    scenario: "Đồng nghiệp mời bạn đi ăn tối cuối tuần; bạn hẹn giờ, đổi lịch và từ chối lịch sự.",
+    v: [
+      ["invite", "/ɪnˈvaɪt/", "mời", "I'd like to invite you to dinner."],
+      ["be free", "/biː friː/", "rảnh", "Are you free on Saturday?"],
+      ["make plans", "/meɪk plænz/", "lên kế hoạch", "Have you made any plans for the weekend?"],
+      ["hang out", "/hæŋ aʊt/", "đi chơi", "Do you want to hang out tonight?"],
+      ["join", "/dʒɔɪn/", "tham gia cùng", "Would you like to join us?"],
+      ["pick up", "/pɪk ʌp/", "đón", "I'll pick you up at seven."],
+      ["postpone", "/pəʊstˈpəʊn/", "hoãn lại", "Can we postpone it to next week?"],
+      ["cancel", "/ˈkæn.səl/", "hủy", "Sorry, I have to cancel."],
+      ["running late", "/ˈrʌn.ɪŋ leɪt/", "đến muộn", "Sorry, I'm running late. I'll be there in 10 minutes."],
+      ["birthday party", "/ˈbɜːθ.deɪ ˈpɑː.ti/", "tiệc sinh nhật", "It's my daughter's birthday party."],
+      ["housewarming", "/ˈhaʊsˌwɔː.mɪŋ/", "tân gia", "We're having a housewarming party."],
+      ["another time", "/əˈnʌð.ər taɪm/", "dịp khác", "Maybe another time."],
+      ["looking forward to", "/ˈlʊk.ɪŋ ˈfɔː.wəd tuː/", "mong chờ", "I'm looking forward to it."],
+      ["treat", "/triːt/", "mời, bao (trả tiền)", "It's my treat tonight."]
+    ],
+    p: [
+      ["Would you like to ___ with us?", "Anh có muốn ___ với chúng tôi không?"],
+      ["I'd love to! What time?", "Rất sẵn lòng! Mấy giờ?"],
+      ["I'm afraid I can't. I have ___.", "Tiếc là tôi không đi được. Tôi có ___."],
+      ["How about ___ instead?", "Thay vào đó ___ thì sao?"],
+      ["Let's meet at ___ at ___.", "Gặp nhau ở ___ lúc ___ nhé."],
+      ["Thanks for inviting me.", "Cảm ơn đã mời tôi."]
+    ],
+    d: [
+      ["A", "Hey Nam, are you free this Saturday evening?", "Này Nam, tối thứ Bảy này anh rảnh không?"],
+      ["B", "I think so. Why?", "Chắc là rảnh. Sao vậy?"],
+      ["A", "A few of us are going out for a barbecue. Would you like to join us?", "Mấy người bọn tôi đi ăn nướng. Anh muốn đi cùng không?"],
+      ["B", "I'd love to! What time and where?", "Rất sẵn lòng! Mấy giờ và ở đâu?"],
+      ["A", "At seven, at a place near West Lake. I can pick you up if you like.", "Bảy giờ, ở một quán gần Hồ Tây. Tôi đón anh nếu anh muốn."],
+      ["B", "That would be great, thanks. Oh wait, I just remembered, I have my son's school event at six.", "Thế thì tốt quá, cảm ơn. À khoan, tôi vừa nhớ ra, sáu giờ tôi có buổi sự kiện ở trường con trai."],
+      ["A", "No problem. Could you come a bit later?", "Không sao. Anh đến muộn hơn chút được không?"],
+      ["B", "How about eight instead? I can get there by taxi.", "Tám giờ thì sao? Tôi có thể đi taxi đến."],
+      ["A", "Perfect. I'll send you the location.", "Hoàn hảo. Tôi sẽ gửi anh địa chỉ."],
+      ["B", "Thanks for inviting me. I'm looking forward to it!", "Cảm ơn đã mời tôi. Tôi rất mong chờ!"]
+    ]
+  },
+  {
+    id: "services", group: "daily", icon: "🏦", roles: ["Nhân viên", "Bạn"],
+    title: "Ngân hàng, SIM & dịch vụ", en: "Bank, Phone & Services",
+    scenario: "Bạn mới sang nước ngoài làm việc: mở tài khoản ngân hàng, mua SIM điện thoại.",
+    v: [
+      ["open an account", "/ˈəʊ.pən ən əˈkaʊnt/", "mở tài khoản", "I'd like to open a bank account."],
+      ["withdraw", "/wɪðˈdrɔː/", "rút tiền", "I want to withdraw 200 dollars."],
+      ["deposit", "/dɪˈpɒz.ɪt/", "gửi tiền vào", "I'd like to deposit this cheque."],
+      ["transfer money", "/trænsˈfɜːr ˈmʌn.i/", "chuyển tiền", "How can I transfer money to Vietnam?"],
+      ["exchange rate", "/ɪksˈtʃeɪndʒ reɪt/", "tỷ giá", "What's the exchange rate today?"],
+      ["fee", "/fiː/", "phí", "Is there a fee for this?"],
+      ["ATM", "/ˌeɪ.tiːˈem/", "máy rút tiền", "Is there an ATM nearby?"],
+      ["proof of address", "/pruːf əv əˈdres/", "giấy tờ chứng minh địa chỉ", "Do you need proof of address?"],
+      ["PIN", "/pɪn/", "mã PIN", "Please enter your PIN."],
+      ["SIM card", "/ˈsɪm kɑːd/", "thẻ SIM", "I need a local SIM card."],
+      ["data plan", "/ˈdeɪ.tə plæn/", "gói dữ liệu", "Which data plan do you recommend?"],
+      ["top up", "/tɒp ʌp/", "nạp tiền", "Where can I top up my phone?"],
+      ["prepaid / postpaid", "/ˌpriːˈpeɪd/", "trả trước / trả sau", "I'd like a prepaid plan."],
+      ["form", "/fɔːm/", "mẫu đơn", "Please fill in this form."]
+    ],
+    p: [
+      ["What documents do I need?", "Tôi cần giấy tờ gì?"],
+      ["How long does it take?", "Mất bao lâu?"],
+      ["Could you explain the fees?", "Anh giải thích giúp các khoản phí được không?"],
+      ["My card got stuck in the ATM.", "Thẻ tôi bị kẹt trong máy ATM."],
+      ["I'd like a plan with ___ GB of data.", "Tôi muốn gói có ___ GB dữ liệu."],
+      ["Where do I sign?", "Tôi ký ở đâu?"]
+    ],
+    d: [
+      ["A", "Good morning. How can I help you today?", "Chào buổi sáng. Hôm nay tôi giúp gì được anh?"],
+      ["B", "Hi. I've just moved here for work, and I'd like to open a bank account.", "Chào chị. Tôi mới chuyển sang đây làm việc và muốn mở tài khoản ngân hàng."],
+      ["A", "Sure. Do you have your passport, work visa and proof of address?", "Vâng. Anh có hộ chiếu, thị thực lao động và giấy tờ chứng minh địa chỉ không?"],
+      ["B", "I have my passport and visa. For the address, is a rental contract okay?", "Tôi có hộ chiếu và thị thực. Về địa chỉ, hợp đồng thuê nhà có được không?"],
+      ["A", "Yes, that's fine. Please fill in this form.", "Được ạ. Anh điền vào mẫu đơn này."],
+      ["B", "Are there any monthly fees?", "Có phí hàng tháng không?"],
+      ["A", "There's no fee if your salary is paid into the account.", "Không mất phí nếu lương được trả vào tài khoản."],
+      ["B", "Great. And can I transfer money to Vietnam online?", "Tuyệt. Tôi có thể chuyển tiền về Việt Nam trực tuyến không?"],
+      ["A", "Yes, through our app. The fee is 5 dollars per transfer.", "Được, qua ứng dụng của chúng tôi. Phí 5 đô mỗi lần chuyển."],
+      ["B", "Perfect. How long until I get my card?", "Tuyệt. Bao lâu thì tôi nhận được thẻ?"],
+      ["A", "About five working days. We'll send it to your address.", "Khoảng năm ngày làm việc. Chúng tôi sẽ gửi đến địa chỉ của anh."]
+    ]
+  },
+  {
+    id: "home", group: "daily", icon: "🏠", roles: ["Chủ nhà", "Bạn"],
+    title: "Thuê nhà & sửa chữa", en: "Renting & Home Problems",
+    scenario: "Bạn đi xem căn hộ để thuê, hỏi điều kiện hợp đồng và báo hỏng hóc cho chủ nhà.",
+    v: [
+      ["apartment / flat", "/əˈpɑːt.mənt/ /flæt/", "căn hộ", "I'm looking for a two-bedroom apartment."],
+      ["landlord", "/ˈlænd.lɔːd/", "chủ nhà", "I'll call the landlord."],
+      ["rent", "/rent/", "tiền thuê; thuê", "The rent is 500 dollars a month."],
+      ["lease / contract", "/liːs/", "hợp đồng thuê", "The lease is for one year."],
+      ["security deposit", "/sɪˈkjʊə.rə.ti dɪˈpɒz.ɪt/", "tiền đặt cọc", "The deposit is two months' rent."],
+      ["utilities", "/juːˈtɪl.ə.tiz/", "điện nước, tiện ích", "Are utilities included in the rent?"],
+      ["furnished", "/ˈfɜː.nɪʃt/", "có sẵn nội thất", "Is the apartment furnished?"],
+      ["leak", "/liːk/", "rò rỉ", "There's a leak under the sink."],
+      ["broken", "/ˈbrəʊ.kən/", "bị hỏng", "The washing machine is broken."],
+      ["blocked / clogged", "/blɒkt/ /klɒɡd/", "bị tắc", "The toilet is blocked."],
+      ["fix / repair", "/fɪks/ /rɪˈpeər/", "sửa", "When can someone fix it?"],
+      ["plumber / electrician", "/ˈplʌm.ər/ /ɪˌlekˈtrɪʃ.ən/", "thợ nước / thợ điện", "I'll send a plumber tomorrow."],
+      ["neighbor", "/ˈneɪ.bər/", "hàng xóm", "My neighbors are very friendly."],
+      ["move in / move out", "/muːv ɪn/", "dọn vào / dọn đi", "When can I move in?"]
+    ],
+    p: [
+      ["How much is the rent per month?", "Tiền thuê mỗi tháng bao nhiêu?"],
+      ["What's included in the rent?", "Tiền thuê đã bao gồm những gì?"],
+      ["Is there parking for a motorbike?", "Có chỗ để xe máy không?"],
+      ["The ___ isn't working.", "___ không hoạt động."],
+      ["Could you send someone to fix it?", "Anh cho người đến sửa được không?"],
+      ["It's quite urgent.", "Việc này khá gấp."]
+    ],
+    d: [
+      ["A", "Hello, Nam? This is the apartment. Come in and have a look.", "Chào, Nam phải không? Đây là căn hộ. Mời vào xem."],
+      ["B", "Thank you. It's very bright. How much is the rent per month?", "Cảm ơn. Căn hộ sáng sủa quá. Tiền thuê mỗi tháng bao nhiêu ạ?"],
+      ["A", "It's 600 dollars, and the deposit is one month's rent.", "600 đô, và tiền cọc là một tháng tiền thuê."],
+      ["B", "Are utilities included?", "Đã bao gồm điện nước chưa ạ?"],
+      ["A", "Water and internet are included, but you pay for electricity separately.", "Đã gồm nước và internet, nhưng tiền điện anh trả riêng."],
+      ["B", "I see. Is it furnished?", "Tôi hiểu. Có sẵn nội thất không?"],
+      ["A", "Yes, it comes with a bed, a sofa, a fridge and a washing machine.", "Có, có giường, sofa, tủ lạnh và máy giặt."],
+      ["B", "And if something breaks, who pays for the repairs?", "Nếu có gì hỏng thì ai trả tiền sửa?"],
+      ["A", "I'll cover major repairs. Just call me and I'll send a plumber or electrician.", "Tôi chịu các sửa chữa lớn. Cứ gọi tôi, tôi sẽ cho thợ nước hoặc thợ điện đến."],
+      ["B", "Sounds good. I'd like to sign a one-year lease. When can I move in?", "Nghe ổn. Tôi muốn ký hợp đồng một năm. Khi nào tôi dọn vào được?"],
+      ["A", "From the first of next month.", "Từ mùng một tháng sau."]
+    ]
   }
 ];
 
@@ -631,5 +1044,10 @@ window.AI_SCENARIOS = [
   { id: "inspection", label: "Nghiệm thu cốt thép / bê tông", prompt: "You are the consultant's inspector checking rebar and formwork before a concrete pour. Point out realistic defects (spacing, cover, lap length, cleanliness) and ask the learner how they will fix them." },
   { id: "claim", label: "Thương lượng phát sinh / gia hạn", prompt: "You are the Engineer under a FIDIC contract. The learner wants a variation and extension of time due to unforeseen soft soil. Be professional but challenge them on notices, evidence and valuation." },
   { id: "safety", label: "Kiểm tra an toàn công trường", prompt: "You are an HSE manager doing a site safety walk. Ask the learner about PPE, work at height, lifting operations and emergency procedures, and react to their answers." },
+  { id: "daily", label: "Đời sống: trò chuyện hàng ngày", prompt: "You are a friendly new neighbor. Chat casually with the learner about everyday life: family, hometown, food, weekend plans, hobbies and the weather." },
+  { id: "restaurant", label: "Đời sống: gọi món ở nhà hàng", prompt: "You are a waiter at a restaurant. Greet the learner, help them order food and drinks, answer questions about dishes and allergies, and handle the bill." },
+  { id: "travel", label: "Đời sống: sân bay & khách sạn", prompt: "Play staff the learner meets while travelling abroad: first an immigration officer, then a hotel receptionist. Ask realistic questions and handle a small problem with the room." },
+  { id: "doctor", label: "Đời sống: đi khám bác sĩ", prompt: "You are a doctor at a clinic abroad. Ask the learner about their symptoms, give simple advice and explain how to take the medicine." },
+  { id: "shopping", label: "Đời sống: mua sắm & đổi trả", prompt: "You are a shop assistant in a clothing or electronics store. Help the learner choose a product, discuss price and discounts, and handle a return or exchange." },
   { id: "design", label: "Thảo luận thiết kế cầu/đường", prompt: "You are a design engineer discussing bridge and road design (alignment, profile, pavement, bridge type, foundations) with the learner. Ask for their opinion and reasons." }
 ];

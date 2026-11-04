@@ -39,6 +39,7 @@
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const topicById = (id) => TOPICS.find((t) => t.id === id);
+  const roleName = (t, who) => t.roles ? t.roles[who === "A" ? 0 : 1] : (who === "A" ? "Đối tác" : "Bạn");
   const h = (html) => { const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstElementChild; };
 
   // ---------- Giọng nói: đọc (TTS) ----------
@@ -187,8 +188,9 @@
       </div>
       ${section("general", "💬 Giao tiếp công việc", "Giới thiệu, họp, gọi điện, thuyết trình, thương lượng…")}
       ${section("tech", "🏗️ Chuyên môn cầu đường", "Kết cấu cầu, thiết kế đường, vật liệu, nền móng, thi công, an toàn, nghiệm thu, hợp đồng FIDIC…")}
+      ${section("daily", "🏡 Đời sống hàng ngày", "Nhà hàng, mua sắm, hỏi đường, sân bay, khách sạn, khám bệnh, gia đình, hẹn hò bạn bè, ngân hàng, thuê nhà…")}
       <h2>🤖 Luyện nói tự do 1-1</h2>
-      <div class="card row"><span>Nói chuyện tự do với gia sư AI theo tình huống: phỏng vấn, họp với tư vấn, nghiệm thu, thương lượng phát sinh…</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
+      <div class="card row"><span>Nói chuyện tự do với gia sư AI theo tình huống: phỏng vấn, họp với tư vấn, nghiệm thu, gọi món, đi khám bệnh, trò chuyện với hàng xóm…</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
     $app.querySelectorAll("[data-topic]").forEach((b) => b.onclick = () => go(`#/topic/${b.dataset.topic}/vocab`));
   }
 
@@ -278,7 +280,7 @@
       </div>
       <div class="chat">${t.d.map(([who, en, vi], i) => `
         <div class="msg ${who}" data-i="${i}">
-          <div class="who">${who === "A" ? "Đối tác" : "Bạn"}</div>
+          <div class="who">${esc(roleName(t, who))}</div>
           <div class="en">${esc(en)}</div>
           <div class="vi" ${settings.showVi ? "" : "hidden"}>${esc(vi)}</div>
           <div class="tools">${speakBtn(en)}<button class="iconbtn" data-slow="${esc(en)}" title="Nghe chậm">🐢</button></div>
@@ -307,7 +309,7 @@
       <div class="scenario">🎬 ${esc(t.scenario)}</div>
       <div class="row" style="margin:12px 0">
         <span>Vai của bạn:</span>
-        <select id="roleSel" style="width:auto"><option value="B">B – ${t.d[0][0] === "B" ? "người trình bày" : "bạn (nhà thầu)"}</option><option value="A">A – đối tác</option></select>
+        <select id="roleSel" style="width:auto"><option value="B">B – ${esc(roleName(t, "B"))}</option><option value="A">A – ${esc(roleName(t, "A"))}</option></select>
         <button class="btn" id="start">▶ Bắt đầu</button>
         <span class="spacer"></span>
         <label class="row" style="margin:0;font-weight:400"><input type="checkbox" id="hint" style="width:auto"> Hiện câu mẫu</label>
@@ -324,7 +326,7 @@
       if (step >= t.d.length) return finish();
       const [who, en, vi] = t.d[step];
       if (who !== myRole) {
-        const el = h(`<div class="msg A"><div class="who">Đối tác</div><div class="en">${esc(en)}</div><div class="vi">${esc(vi)}</div><div class="tools">${speakBtn(en)}</div></div>`);
+        const el = h(`<div class="msg A"><div class="who">${esc(who === "B" ? "Người đối diện" : roleName(t, who))}</div><div class="en">${esc(en)}</div><div class="vi">${esc(vi)}</div><div class="tools">${speakBtn(en)}</div></div>`);
         log.appendChild(el); wireSay(el); el.scrollIntoView({ block: "center", behavior: "smooth" });
         await speak(en);
         step++; return next();
