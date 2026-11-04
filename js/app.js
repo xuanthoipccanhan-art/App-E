@@ -52,14 +52,21 @@
       || voices.find((v) => v.lang === lang)
       || voices.find((v) => v.lang && v.lang.startsWith("en"));
   }
+  // Giọng thứ hai (khác giọng chính) cho hội thoại 2 người, ví dụ TOEIC Part 3
+  function altVoice() {
+    const main = pickVoice();
+    const en = voices.filter((v) => v.lang && v.lang.startsWith("en") && v !== main);
+    return en.find((v) => v.lang === settings.accent) || en[0] || main;
+  }
   function speak(text, opts = {}) {
     return new Promise((resolve) => {
       if (!window.speechSynthesis) return resolve();
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text.replace(/___/g, "blank"));
       u.lang = settings.accent;
-      const v = pickVoice(); if (v) u.voice = v;
+      const v = opts.alt ? altVoice() : pickVoice(); if (v) u.voice = v;
       u.rate = opts.rate || settings.rate;
+      if (opts.pitch) u.pitch = opts.pitch;
       u.onend = u.onerror = () => resolve();
       speechSynthesis.speak(u);
     });
@@ -82,6 +89,28 @@
       r.onend = () => { if (!done) { done = true; reject(new Error("Không nghe thấy gì, thử lại nhé.")); } };
       r.start();
     });
+  }
+
+  // Ghi âm dài (TOEIC Speaking): nghe liên tục tới khi hết giờ hoặc bấm dừng
+  function listenLong(onText) {
+    if (!SR) return null;
+    const r = new SR();
+    r.lang = settings.accent; r.continuous = true; r.interimResults = true;
+    let finalText = "", stopped = false, resolveFn;
+    const done = new Promise((res) => { resolveFn = res; });
+    r.onresult = (e) => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) finalText += e.results[i][0].transcript + " ";
+        else interim += e.results[i][0].transcript;
+      }
+      if (onText) onText((finalText + interim).trim());
+    };
+    r.onerror = (e) => { if (e.error === "not-allowed" || e.error === "service-not-allowed" || e.error === "audio-capture") stopped = true; };
+    // Safari/Chrome có thể tự dừng khi im lặng: khởi động lại cho tới khi hết giờ
+    r.onend = () => { if (stopped) resolveFn(finalText.trim()); else { try { r.start(); } catch (e) { resolveFn(finalText.trim()); } } };
+    r.start();
+    return { stop() { stopped = true; try { r.stop(); } catch (e) { resolveFn(finalText.trim()); } return done; }, done };
   }
 
   // ---------- Chấm điểm phát âm/câu nói ----------
@@ -156,6 +185,9 @@
         if (window.renderTutor) return window.renderTutor($app, App);
         $app.innerHTML = '<p class="sub">Đang tải gia sư AI…</p>'; return;
       case "settings": return renderSettings();
+      case "toeic":
+        if (window.renderToeic) return window.renderToeic($app, App, parts.slice(1));
+        $app.innerHTML = '<p class="sub">Đang tải TOEIC…</p>'; return;
       default: return renderHome();
     }
   }
@@ -189,6 +221,8 @@
       ${section("general", "💬 Giao tiếp công việc", "Giới thiệu, họp, gọi điện, thuyết trình, thương lượng…")}
       ${section("tech", "🏗️ Chuyên môn cầu đường", "Kết cấu cầu, thiết kế đường, vật liệu, nền móng, thi công, an toàn, nghiệm thu, hợp đồng FIDIC…")}
       ${section("daily", "🏡 Đời sống hàng ngày", "Nhà hàng, mua sắm, hỏi đường, sân bay, khách sạn, khám bệnh, gia đình, hẹn hò bạn bè, ngân hàng, thuê nhà…")}
+      <h2>🎯 Luyện thi TOEIC 4 kỹ năng</h2>
+      <div class="card row"><span>Listening (Part 1–4), Reading (Part 5–7), Speaking (11 câu có đếm giờ, ghi âm), Writing (8 câu). Có đề rút gọn tính giờ và ước tính điểm.</span><span class="spacer"></span><button class="btn" data-nav="toeic">Luyện thi</button></div>
       <h2>🤖 Luyện nói tự do 1-1</h2>
       <div class="card row"><span>Nói chuyện tự do với gia sư AI theo tình huống: phỏng vấn, họp với tư vấn, nghiệm thu, gọi món, đi khám bệnh, trò chuyện với hàng xóm…</span><span class="spacer"></span><button class="btn" data-nav="tutor">Bắt đầu</button></div>`;
     $app.querySelectorAll("[data-topic]").forEach((b) => b.onclick = () => go(`#/topic/${b.dataset.topic}/vocab`));
@@ -523,7 +557,8 @@
   }
 
   // Xuất các tiện ích cho tutor.js
-  const App = { speak, listen, esc, settings, saveSettings, route, isTutorRoute: () => location.hash.startsWith("#/tutor") };
+  const App = { speak, listen, listenLong, hasSR: !!SR, bestOf, verdict, shuffle, esc, settings, saveSettings, route, touchStreak,
+    loadData: (k, f) => load(k, f), saveData: save, isTutorRoute: () => location.hash.startsWith("#/tutor") };
   window.App = App;
   route();
 })();

@@ -168,6 +168,32 @@ function renderTutor($app, App) {
   };
 }
 
+// Chấm một bài làm (TOEIC Speaking/Writing): một lượt hỏi, không lưu vào hội thoại
+async function grade(system, userText) {
+  if (!cfg.apiKey) throw new Error("Chưa có khóa API. Vào mục Gia sư AI → Cài đặt gia sư AI để nhập khóa.");
+  try { await sdk(); } catch (e) { throw new Error("Không tải được thư viện Anthropic SDK (cần Internet)."); }
+  const client = new Anthropic({ apiKey: cfg.apiKey, dangerouslyAllowBrowser: true });
+  try {
+    const res = await client.beta.messages.create({
+      model: cfg.model,
+      max_tokens: 4000,
+      system,
+      messages: [{ role: "user", content: userText }],
+      output_config: { effort: "low" },
+      ...(cfg.model === "claude-haiku-5-5" ? {} : { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" })
+    });
+    if (res.stop_reason === "refusal") throw new Error("Mô hình đã từ chối chấm bài này.");
+    return res.content.filter((b) => b.type === "text").map((b) => b.text).join("\n");
+  } catch (err) {
+    if (err instanceof Anthropic.AuthenticationError) throw new Error("Khóa API không hợp lệ. Kiểm tra lại trong mục Gia sư AI.");
+    if (err instanceof Anthropic.RateLimitError) throw new Error("Đã vượt giới hạn tần suất. Đợi một chút rồi thử lại.");
+    if (err instanceof Anthropic.APIConnectionError) throw new Error("Không kết nối được tới máy chủ. Kiểm tra mạng.");
+    if (err instanceof Anthropic.APIError) throw new Error(`Lỗi API (${err.status}): ${err.message}`);
+    throw err;
+  }
+}
+window.ClaudeAI = { hasKey: () => !!cfg.apiKey, grade };
+
 window.renderTutor = renderTutor;
 if (window.App && window.App.isTutorRoute()) window.App.route();
 })();

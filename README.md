@@ -13,6 +13,7 @@
 | 🃏 Flashcard | Lật thẻ Anh ↔ Việt, ôn lại từ chưa nhớ |
 | 📝 Kiểm tra | 4 dạng câu hỏi: Anh→Việt, Việt→Anh, điền từ, nghe chọn từ. Câu sai tự thêm vào danh sách từ khó |
 | 🔁 Ôn tập | Ôn tổng hợp tất cả chủ đề hoặc chỉ các từ khó |
+| 🎯 Luyện thi TOEIC | **Listening** Part 1–4 (máy đọc, hội thoại 2 giọng nam/nữ, hiện script sau khi trả lời) · **Reading** Part 5–7 (có giải thích đáp án tiếng Việt) · **Speaking** 11 câu (đếm giờ chuẩn bị/trả lời như thi thật, tự ghi lại lời nói, bài mẫu) · **Writing** 8 câu (đếm giờ, đếm từ, kiểm tra nhanh cấu trúc, bài mẫu) · **Đề rút gọn L&R** 40 câu/25 phút, nghe 1 lần, ước tính điểm thang 990, xem lại câu sai. Có khóa API thì AI chấm Speaking/Writing theo thang điểm TOEIC |
 | 🤖 Gia sư AI | Hội thoại tự do với Claude theo tình huống (phỏng vấn, họp với tư vấn, nghiệm thu, thương lượng FIDIC, gọi món, sân bay & khách sạn, khám bệnh, trò chuyện hàng ngày…). Sau mỗi câu, gia sư sửa lỗi và gợi ý cách nói tự nhiên hơn bằng tiếng Việt |
 
 Tiến độ (từ đã thuộc, điểm kiểm tra, điểm đóng vai, chuỗi ngày học) được lưu trong trình duyệt.
@@ -78,4 +79,6 @@ css/style.css     Giao diện (hỗ trợ sáng/tối, điện thoại)
 js/data.js        Nội dung bài học
 js/app.js         Từ vựng, hội thoại, đóng vai, flashcard, kiểm tra, ôn tập, cài đặt
 js/tutor.js       Gia sư AI (Claude)
+js/toeic-data.js  Ngân hàng câu hỏi TOEIC (tự soạn theo format đề thi)
+js/toeic.js       Luyện thi TOEIC 4 kỹ năng, đề rút gọn, AI chấm bài
 ```
